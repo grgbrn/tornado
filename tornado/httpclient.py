@@ -204,7 +204,8 @@ class HTTPRequest(object):
                  network_interface=None, streaming_callback=None,
                  header_callback=None, prepare_curl_callback=None,
                  proxy_host=None, proxy_port=None, proxy_username=None,
-                 proxy_password='', allow_nonstandard_methods=False,
+                 proxy_password='', proxy_type=None,
+                 allow_nonstandard_methods=False,
                  validate_cert=True, ca_certs=None,
                  allow_ipv6=None,
                  client_key=None, client_cert=None):
@@ -245,6 +246,7 @@ class HTTPRequest(object):
         :arg int proxy_port: HTTP proxy port
         :arg string proxy_username: HTTP proxy username
         :arg string proxy_password: HTTP proxy password
+        :arg string proxy_type: 'http', 'socks4' or 'socks5'. Defaults to http.
         :arg bool allow_nonstandard_methods: Allow unknown values for `method` 
            argument?
         :arg bool validate_cert: For HTTPS requests, validate the server's
@@ -269,6 +271,7 @@ class HTTPRequest(object):
         self.proxy_port = proxy_port
         self.proxy_username = proxy_username
         self.proxy_password = proxy_password
+        self.proxy_type = proxy_type
         self.url = url
         self.method = method
         self.headers = headers

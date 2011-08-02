@@ -320,6 +320,11 @@ def _curl_setup_request(curl, request, buffer, headers):
     else:
         curl.setopt(pycurl.ENCODING, "none")
     if request.proxy_host and request.proxy_port:
+        if request.proxy_type:
+            p = {'http': pycurl.PROXYTYPE_HTTP,
+                 'socks4':pycurl.PROXYTYPE_SOCKS4,
+                 'socks5':pycurl.PROXYTYPE_SOCKS5}
+            curl.setopt(pycurl.PROXYTYPE, p.get(request.proxy_type.lower()))
         curl.setopt(pycurl.PROXY, request.proxy_host)
         curl.setopt(pycurl.PROXYPORT, request.proxy_port)
         if request.proxy_username:
